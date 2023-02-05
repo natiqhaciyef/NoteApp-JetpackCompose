@@ -114,6 +114,6 @@ fun calendarFormatter(calendar: Calendar): String {
 
 
 // Will add in view-model
-fun calendarFormatterForWeekly(calendar: Calendar): String {
-    return calendar.get(Calendar.DAY_OF_WEEK).toString()
-}
+fun calendarFormatterForWeekly(calendar: Calendar): String =
+    calendar.get(Calendar.DAY_OF_WEEK).toString()
+

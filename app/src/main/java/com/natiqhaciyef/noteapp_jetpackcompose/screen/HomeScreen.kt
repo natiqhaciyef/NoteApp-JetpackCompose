@@ -20,14 +20,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.natiqhaciyef.noteapp_jetpackcompose.model.NoteModel
+import com.natiqhaciyef.noteapp_jetpackcompose.navigation.ScreenID
 import com.natiqhaciyef.noteapp_jetpackcompose.ui.theme.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Preview
+//@Preview
 @Composable
-fun HomeScreen(noteList: MutableList<NoteModel> = mutableListOf()) {
+fun HomeScreen(
+    navController: NavController,
+    noteList: MutableList<NoteModel> = mutableListOf()
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
@@ -35,13 +40,20 @@ fun HomeScreen(noteList: MutableList<NoteModel> = mutableListOf()) {
                 modifier = Modifier
                     .size(55.dp)
                     .clip(shape = CircleShape)
-                    .background(Aquatic),
+                    .background(Aquatic)
+                    .clickable {
+                        navController.navigate(ScreenID.AddScreen.name)
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add Note Buttonn",
-                    modifier = Modifier.size(32.dp),
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clickable {
+                            navController.navigate(ScreenID.AddScreen.name)
+                        },
                     tint = Color.Black
                 )
             }
@@ -59,9 +71,11 @@ fun HomeScreen(noteList: MutableList<NoteModel> = mutableListOf()) {
 
 @Preview
 @Composable
-fun LazyColumnRows(note: NoteModel =
-                       NoteModel(id= 0 , "Text","desc intro bust","21-01-2023"),
-                   content: () -> Unit = { }) {
+fun LazyColumnRows(
+    note: NoteModel =
+        NoteModel(id = 0, "Text", "desc intro bust", "21-01-2023"),
+    content: () -> Unit = { }
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
